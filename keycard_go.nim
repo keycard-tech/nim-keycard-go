@@ -3,9 +3,17 @@ import ./keycard_go/impl as go_shim
 export KeycardSignalCallback
 
 proc keycardInitFlow*(storageDir: string): string =
+  echo "before calling keycardInitFlow"
   var funcOut = go_shim.keycardInitFlow(storageDir.cstring)
+  echo "after calling keycardInitFlow"
   defer: go_shim.free(funcOut)
-  return $funcOut
+  echo "after feeeing memory"
+  var response = "nil"
+  if not funcOut.isNil:
+    echo "funcOut is not Nil"
+    response = $funcOut
+  echo "returning response ->", $response
+  return response
 
 proc keycardStartFlow*(flowType: int, jsonParams: string): string =
   var funcOut = go_shim.keycardStartFlow(flowType.cint, jsonParams.cstring)
