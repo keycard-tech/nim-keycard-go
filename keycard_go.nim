@@ -6,13 +6,13 @@ proc keycardInitFlow*(storageDir: string): string =
   echo "before calling keycardInitFlow"
   var funcOut = go_shim.keycardInitFlow(storageDir.cstring)
   echo "after calling keycardInitFlow"
-  defer: go_shim.free(funcOut)
-  echo "after feeeing memory in keycardInitFlow"
   var response = "nil"
   if not funcOut.isNil:
     echo "funcOut is not Nil in keycardInitFlow"
     response = $funcOut
   echo "returning response for keycardInitFlow ->", response
+  go_shim.free(funcOut)
+  echo "after feeeing memory in keycardInitFlow"
   return response
 
 proc keycardStartFlow*(flowType: int, jsonParams: string): string =
@@ -29,13 +29,13 @@ proc keycardCancelFlow*(): string =
   echo "before calling keycardCancelFlow"
   var funcOut = go_shim.keycardCancelFlow()
   echo "after calling keycardCancelFlow"
-  defer: go_shim.free(funcOut)
-  echo "after feeeing memory in keycardCancelFlow"
   var response = "nil"
   if not funcOut.isNil:
       echo "funcOut is not Nil in keycardCancelFlow"
       response = $funcOut
   echo "returning response for keycardCancelFlow ->", response
+  go_shim.free(funcOut)
+  echo "after feeeing memory in keycardCancelFlow"
   return response
 
 proc setSignalEventCallback*(callback: KeycardSignalCallback) =
