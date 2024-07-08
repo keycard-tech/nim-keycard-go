@@ -12,7 +12,7 @@ proc keycardInitFlow*(storageDir: string): string =
   if not funcOut.isNil:
     echo "funcOut is not Nil in keycardInitFlow"
     response = $funcOut
-  echo "returning response for keycardInitFlow ->", $response
+  echo "returning response for keycardInitFlow ->", response
   return response
 
 proc keycardStartFlow*(flowType: int, jsonParams: string): string =
@@ -35,7 +35,7 @@ proc keycardCancelFlow*(): string =
   if not funcOut.isNil:
       echo "funcOut is not Nil in keycardCancelFlow"
       response = $funcOut
-  echo "returning response for keycardCancelFlow ->", $response
+  echo "returning response for keycardCancelFlow ->", response
   return response
 
 proc setSignalEventCallback*(callback: KeycardSignalCallback) =
