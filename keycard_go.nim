@@ -22,6 +22,16 @@ proc keycardCancelFlow*(): string =
   defer: go_shim.free(funcOut)
   return $funcOut
 
+proc keycardInitializeRPC*(): string =
+  var funcOut = go_shim.keycardInitializeRPC()
+  defer: go_shim.free(funcOut)
+  return $funcOut
+
+proc keycardCallRPC*(params: string): string =
+  var funcOut = go_shim.keycardCallRPC(params.cstring)
+  defer: go_shim.free(funcOut)
+  return $funcOut
+
 proc setSignalEventCallback*(callback: KeycardSignalCallback) =
   go_shim.setSignalEventCallback(callback)
 
