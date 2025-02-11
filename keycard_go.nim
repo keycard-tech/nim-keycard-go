@@ -60,3 +60,6 @@ proc mockedLibKeycardRemoved*(): string =
   var funcOut = go_shim.mockedLibKeycardRemoved()
   defer: go_shim.free(funcOut)
   return $funcOut
+
+proc ResetAPI*() =
+  go_shim.resetAPI()
