@@ -63,3 +63,6 @@ proc mockedLibKeycardRemoved*(): string =
 
 proc ResetAPI*() =
   go_shim.resetAPI()
+
+proc initializeLibrary*() =
+  go_shim.initializeLibrary()
