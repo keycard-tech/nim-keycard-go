@@ -2,6 +2,9 @@ import ./keycard_go/impl as go_shim
 
 export KeycardSignalCallback
 
+proc initializeStatusKeycardGo*() =
+  go_shim.initializeStatusKeycardGo()
+
 proc keycardInitFlow*(storageDir: string): string =
   var funcOut = go_shim.keycardInitFlow(storageDir.cstring)
   defer: go_shim.free(funcOut)

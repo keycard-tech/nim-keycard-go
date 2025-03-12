@@ -5,6 +5,8 @@
 
 type KeycardSignalCallback* = proc(signal: cstring): void {.cdecl, gcsafe, raises: [].}
 
+proc initializeStatusKeycardGo*(): void {.importc: "InitializeStatusKeycardGo".}
+
 proc free*(param: pointer) {.importc: "Free".}
 proc setSignalEventCallback*(callback: KeycardSignalCallback) {.importc: "KeycardSetSignalEventCallback".}
 proc resetAPI*() {.importc: "ResetAPI".}
