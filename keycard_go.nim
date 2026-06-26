@@ -2,31 +2,6 @@ import ./keycard_go/impl as go_shim
 
 export KeycardSignalCallback
 
-proc keycardInitFlow*(storageDir: string): string =
-  var funcOut = go_shim.keycardInitFlow(storageDir.cstring)
-  defer: go_shim.free(funcOut)
-  return $funcOut
-
-proc keycardStartFlow*(flowType: int, jsonParams: string): string =
-  var funcOut = go_shim.keycardStartFlow(flowType.cint, jsonParams.cstring)
-  defer: go_shim.free(funcOut)
-  return $funcOut
-
-proc keycardResumeFlow*(jsonParams: string): string =
-  var funcOut = go_shim.keycardResumeFlow(jsonParams.cstring)
-  defer: go_shim.free(funcOut)
-  return $funcOut
-
-proc keycardCancelFlow*(): string =
-  var funcOut = go_shim.keycardCancelFlow()
-  defer: go_shim.free(funcOut)
-  return $funcOut
-
-proc keycardInitializeRPC*(): string =
-  var funcOut = go_shim.keycardInitializeRPC()
-  defer: go_shim.free(funcOut)
-  return $funcOut
-
 proc keycardCallRPC*(params: string): string =
   var funcOut = go_shim.keycardCallRPC(params.cstring)
   defer: go_shim.free(funcOut)
@@ -61,5 +36,3 @@ proc mockedLibKeycardRemoved*(): string =
   defer: go_shim.free(funcOut)
   return $funcOut
 
-proc ResetAPI*() =
-  go_shim.resetAPI()
