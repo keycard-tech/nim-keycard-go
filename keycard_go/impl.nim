@@ -10,9 +10,10 @@ proc setSignalEventCallback*(callback: KeycardSignalCallback) {.importc: "Keycar
 
 proc keycardCallRPC*(params: cstring): cstring {.importc: "KeycardCallRPC".}
 
-# availale in test mode only
-proc mockedLibRegisterKeycard*(cardIndex: cint, readerState: cint, keycardState: cint, mockedKeycard: cstring, mockedKeycardHelper: cstring): cstring {.importc: "MockedLibRegisterKeycard".}
-proc mockedLibReaderPluggedIn*(): cstring {.importc: "MockedLibReaderPluggedIn".}
-proc mockedLibReaderUnplugged*(): cstring {.importc: "MockedLibReaderUnplugged".}
-proc mockedLibKeycardInserted*(cardIndex: cint): cstring {.importc: "MockedLibKeycardInserted".}
-proc mockedLibKeycardRemoved*(): cstring {.importc: "MockedLibKeycardRemoved".}
+# Available only when status-keycard-qt is built with USE_SIMULATED_KEYCARD (app built with -d:useSimulatedKeycard)
+when defined(useSimulatedKeycard):
+  proc keycardTestCreateCard*(cardId: cstring): cstring {.importc: "KeycardTestCreateCard".}
+  proc keycardTestInsertCard*(cardId: cstring): cstring {.importc: "KeycardTestInsertCard".}
+  proc keycardTestRemoveCard*(): cstring {.importc: "KeycardTestRemoveCard".}
+  proc keycardTestPlugReader*(): cstring {.importc: "KeycardTestPlugReader".}
+  proc keycardTestUnplugReader*(): cstring {.importc: "KeycardTestUnplugReader".}
